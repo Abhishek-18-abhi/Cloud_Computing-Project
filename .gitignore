@@ -1,0 +1,11 @@
+.vercel
+node_modules/
+dist/
+build/
+.env
+.env.local
+.env.*.local
+backend/.env
+my-react-app/.env.local
+!.env.example
+*.log
