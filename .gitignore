@@ -1,11 +1,10 @@
+
 .vercel
+.env*
+
+# Dependencies
 node_modules/
-dist/
-build/
+
+# Environment files
 .env
 .env.local
-.env.*.local
-backend/.env
-my-react-app/.env.local
-!.env.example
-*.log
