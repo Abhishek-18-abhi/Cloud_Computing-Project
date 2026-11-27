@@ -1,9 +1,0 @@
-{
-  "name": "my-react-app-nested-shim",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "npm --prefix .. run build"
-  }
-}
