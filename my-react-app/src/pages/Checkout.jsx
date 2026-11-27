@@ -2,17 +2,12 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { useCart } from "../context/useCart";
+import { useAuth } from "../context/useAuth";
 import { formatPrice } from "../data/products";
 import api from "../lib/api";
 
 const WHATSAPP_NUMBER = "";
 
-const initialCustomer = {
-  name: "",
-  phone: "",
-  email: "",
-  address: "",
-};
 
 function calculateOrder(cart, subtotal) {
   const delivery = subtotal === 0 || subtotal >= 10000 ? 0 : 299;
@@ -26,8 +21,14 @@ function calculateOrder(cart, subtotal) {
 }
 
 function Checkout() {
+  const { user } = useAuth();
   const { cart, subtotal, clearCart } = useCart();
-  const [customer, setCustomer] = useState(initialCustomer);
+  const [customer, setCustomer] = useState(() => ({
+    name: user?.user_metadata?.full_name || "",
+    phone: user?.user_metadata?.phone || "",
+    email: user?.email || "",
+    address: "",
+  }));
   const [paymentMethod, setPaymentMethod] = useState("UPI");
   const [paymentReference, setPaymentReference] = useState("");
   const [bill, setBill] = useState(null);
@@ -108,7 +109,15 @@ function Checkout() {
         ...order,
       });
     } catch (error) {
-      alert(error.response?.data?.message || "Could not save the order. Please try again.");
+      console.error("Order error:", error);
+      const serverMessage = error.response?.data?.message;
+      if (error.response?.status === 401) {
+        alert("Your session has expired or you are not signed in. Please log in again.");
+      } else if (serverMessage) {
+        alert(serverMessage);
+      } else {
+        alert("Could not save the order. Please check your connection and try again.");
+      }
     } finally {
       setSubmitting(false);
     }

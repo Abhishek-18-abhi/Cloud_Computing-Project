@@ -34,6 +34,10 @@ function Signup() {
 
     setLoading(true);
 
+    const redirectUrl = typeof window !== "undefined"
+      ? `${window.location.origin}/login`
+      : undefined;
+
     const { data, error } = await supabase.auth.signUp({
       email: user.email.trim(),
       password: user.password,
@@ -42,6 +46,7 @@ function Signup() {
           full_name: user.fullname.trim(),
           phone: user.phone.trim(),
         },
+        emailRedirectTo: redirectUrl,
       },
     });
 
@@ -55,7 +60,9 @@ function Signup() {
     if (data.session) {
       navigate("/");
     } else {
-      alert("Account created. Check your email to confirm your account, then log in.");
+      alert(
+        "Account created successfully! A confirmation link has been sent to your email. Please check your inbox and verify your email before logging in."
+      );
       navigate("/login");
     }
   }

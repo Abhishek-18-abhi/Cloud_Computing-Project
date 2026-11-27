@@ -23,7 +23,13 @@ function Login() {
     setLoading(false);
 
     if (error) {
-      alert(error.message);
+      if (error.message.toLowerCase().includes("email not confirmed")) {
+        alert(
+          "Your email address has not been confirmed yet. Please check your email inbox for the verification link and confirm it before logging in."
+        );
+      } else {
+        alert(error.message);
+      }
       return;
     }
 
