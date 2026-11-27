@@ -1,9 +1,12 @@
 import axios from "axios";
 import { supabase } from "./supabase";
 
+// Always use same-origin "/api" in the browser so requests flow through
+// Vercel's serverless reverse-proxy (in vercel.json) or Vite's dev proxy.
+// This completely eliminates cross-origin CORS blocks.
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "/api",
-  timeout: 15000,
+  baseURL: "/api",
+  timeout: 30000,
   headers: {
     "Content-Type": "application/json",
   },

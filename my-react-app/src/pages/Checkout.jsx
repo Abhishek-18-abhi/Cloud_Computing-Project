@@ -43,8 +43,8 @@ function Checkout() {
     setCustomer((current) => ({ ...current, [field]: value }));
   }
   function printBill() {
-  window.print();
-} 
+    window.print();
+  }
 
   function openWhatsAppOrder() {
     const lines = cart.map((item, index) => (
