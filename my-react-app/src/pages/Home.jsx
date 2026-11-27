@@ -26,12 +26,12 @@ function Home() {
       <Navbar />
       <section className="hero">
         <div className="hero-background" aria-hidden="true">
-          <Swiper modules={[Autoplay, Pagination]} spaceBetween={20} slidesPerView={1} loop={true} autoplay={{delay: 3000, disableOnInteraction: false,}} pagination={{ clickable: true }}>
-          {featuredProducts.map((product) => (
-          <SwiperSlide key={product.id}>
-            <img src={product.img} alt={product.name} className="hero-slider-image"/>
-          </SwiperSlide>
-          ))}
+          <Swiper modules={[Autoplay, Pagination]} spaceBetween={20} slidesPerView={1} loop={true} autoplay={{ delay: 3000, disableOnInteraction: false, }} pagination={{ clickable: true }}>
+            {featuredProducts.map((product) => (
+              <SwiperSlide key={product.id}>
+                <img src={product.img} alt={product.name} className="hero-slider-image" />
+              </SwiperSlide>
+            ))}
           </Swiper>
           <div className="hero-background-overlay" />
         </div>
