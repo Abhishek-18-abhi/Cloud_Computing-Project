@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/api",
+      "destination": "https://cloud-computing-mth1.vercel.app/api/health"
+    },
+    {
+      "source": "/api/:match*",
+      "destination": "https://cloud-computing-mth1.vercel.app/api/:match*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/"
     }

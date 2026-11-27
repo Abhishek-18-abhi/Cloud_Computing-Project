@@ -4,8 +4,12 @@
   "outputDirectory": "my-react-app/dist",
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
+      "source": "/api",
+      "destination": "https://cloud-computing-mth1.vercel.app/api/health"
+    },
+    {
+      "source": "/api/:match*",
+      "destination": "https://cloud-computing-mth1.vercel.app/api/:match*"
     },
     {
       "source": "/(.*)",
